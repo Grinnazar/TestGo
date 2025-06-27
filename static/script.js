@@ -1,37 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const travelForm = document.getElementById('travel-form');
-    const initialInputContainer = document.getElementById('initial-input-container');
-    const chatContainer = document.getElementById('chat-container');
+    // Note: travelForm and initialInputContainer are removed from the HTML or no longer used for switching views.
+    // const travelForm = document.getElementById('travel-form'); // No longer exists with this ID for submission
+    // const initialInputContainer = document.getElementById('initial-input-container'); // Removed
+    const chatContainer = document.getElementById('chat-container'); // Still used, but always visible
     const chatBox = document.getElementById('chat-box');
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
 
-    // Handle initial travel form submission
-    travelForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const dates = document.getElementById('dates').value;
-        const budget = document.getElementById('budget').value;
-        const preferences = document.getElementById('preferences').value;
+    // Parameters are now part of the main interface
+    const datesInput = document.getElementById('dates');
+    const budgetInput = document.getElementById('budget');
+    const preferencesInput = document.getElementById('preferences');
 
-        // Basic validation
-        if (!dates || !budget || !preferences) {
-            alert('Please fill in all fields.');
-            return;
-        }
-
-        const initialPrompt = `Plan a trip with dates: ${dates}, budget: ${budget}, preferences: ${preferences}.`;
-
-        // Hide initial form and show chat interface
-        initialInputContainer.style.display = 'none';
-        chatContainer.style.display = 'block';
-
-        // Display user's initial prompt in chat (optional, but good for UX)
-        addMessageToChatBox(initialPrompt, 'user');
-
-        // Send the initial prompt to the backend (to be implemented)
-        // For now, we'll just simulate a bot response
-        await handleUserMessage(initialPrompt);
-    });
+    // No longer need to hide initial form or show chat interface, it's always visible.
+    // travelForm event listener is removed.
 
     // Handle chat message sending
     sendButton.addEventListener('click', handleSendChatMessage);
@@ -42,12 +24,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function handleSendChatMessage() {
-        const messageText = userInput.value.trim();
-        if (messageText) {
-            addMessageToChatBox(messageText, 'user');
-            userInput.value = '';
-            await handleUserMessage(messageText);
+        const userMessageText = userInput.value.trim();
+        const dates = datesInput.value.trim();
+        const budget = budgetInput.value.trim();
+        const preferences = preferencesInput.value.trim();
+
+        if (!userMessageText) {
+            alert('Please enter a message to chat.');
+            return;
         }
+
+        let fullPrompt = "";
+
+        // Construct the prompt including parameters if they are filled
+        // We can decide if parameters are only for the "first" message or always prepended.
+        // For this iteration, let's prepend them if available, making them context for any message.
+        let paramsProvided = false;
+        if (dates || budget || preferences) {
+            paramsProvided = true;
+            fullPrompt += `Considering these trip parameters: `;
+            if (dates) fullPrompt += `Dates: ${dates}. `;
+            if (budget) fullPrompt += `Budget: ${budget}. `;
+            if (preferences) fullPrompt += `Preferences: ${preferences}. `;
+            fullPrompt += "\n\n"; // Add a separator
+        }
+
+        fullPrompt += `User's message: "${userMessageText}"`;
+
+        // Display what the user typed, or a summary if parameters were also included.
+        // For simplicity, we'll just display the user's direct message in the chatbox as 'user'.
+        // The full context (with parameters) is sent to the bot.
+        addMessageToChatBox(userMessageText, 'user');
+        userInput.value = ''; // Clear the input field
+
+        // If it's the first time user sends a message and parameters were empty,
+        // we might want to remind them to fill parameters.
+        // For now, we allow sending messages even if parameters are empty.
+
+        await handleUserMessage(fullPrompt); // Send the potentially augmented prompt
     }
 
     // Function to add messages to the chat box
