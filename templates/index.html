@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI-Powered Travel Planning Made Simple</h1>
+        </header>
+        <main>
+            <div id="initial-input-container">
+                <h2>Plan Your Dream Trip</h2>
+                <form id="travel-form">
+                    <label for="dates">Dates:</label>
+                    <input type="text" id="dates" name="dates" placeholder="e.g., 2024-12-20 to 2025-01-05">
+
+                    <label for="budget">Budget:</label>
+                    <input type="text" id="budget" name="budget" placeholder="e.g., $2000 USD">
+
+                    <label for="preferences">Preferences:</label>
+                    <textarea id="preferences" name="preferences" placeholder="e.g., Beach vacation, historical sites, family-friendly activities"></textarea>
+
+                    <button type="submit">Start Planning</button>
+                </form>
+            </div>
+
+            <div id="chat-container" style="display: none;">
+                <h2>Chat with AI Travel Planner</h2>
+                <div id="chat-box">
+                    <!-- Chat messages will appear here -->
+                </div>
+                <div id="input-area">
+                    <input type="text" id="user-input" placeholder="Ask for alternatives, details, etc.">
+                    <button id="send-button">Send</button>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2024 AI Travel Planner</p>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
