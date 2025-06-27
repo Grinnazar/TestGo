@@ -12,9 +12,9 @@
             <h1>AI-Powered Travel Planning Made Simple</h1>
         </header>
         <main>
-            <div id="initial-input-container">
-                <h2>Plan Your Dream Trip</h2>
-                <form id="travel-form">
+            <div id="trip-parameters">
+                <h2>Define Your Trip</h2>
+                <form id="travel-parameters-form">
                     <label for="dates">Dates:</label>
                     <input type="text" id="dates" name="dates" placeholder="e.g., 2024-12-20 to 2025-01-05">
 
@@ -23,18 +23,17 @@
 
                     <label for="preferences">Preferences:</label>
                     <textarea id="preferences" name="preferences" placeholder="e.g., Beach vacation, historical sites, family-friendly activities"></textarea>
-
-                    <button type="submit">Start Planning</button>
+                    <!-- The "Start Planning" button is removed. Parameters will be picked up by the chat. -->
                 </form>
             </div>
 
-            <div id="chat-container" style="display: none;">
+            <div id="chat-container"> <!-- No longer hidden by default -->
                 <h2>Chat with AI Travel Planner</h2>
                 <div id="chat-box">
                     <!-- Chat messages will appear here -->
                 </div>
                 <div id="input-area">
-                    <input type="text" id="user-input" placeholder="Ask for alternatives, details, etc.">
+                    <input type="text" id="user-input" placeholder="Ask for alternatives, details, or start planning...">
                     <button id="send-button">Send</button>
                 </div>
             </div>

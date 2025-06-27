@@ -36,46 +36,52 @@ main h2 {
     margin-bottom: 20px;
 }
 
-#initial-input-container form {
+/* Styles for the new trip parameters section */
+#trip-parameters {
+    margin-bottom: 30px; /* Space before chat container */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+#trip-parameters h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: left; /* Align to left for a form feel */
+}
+
+#travel-parameters-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-#initial-input-container label {
+#travel-parameters-form label {
     font-weight: bold;
+    margin-bottom: -10px; /* Reduce space between label and input */
 }
 
-#initial-input-container input[type="text"],
-#initial-input-container textarea {
+#travel-parameters-form input[type="text"],
+#travel-parameters-form textarea {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
+    width: 100%; /* Make inputs take full width of form */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-#initial-input-container textarea {
+#travel-parameters-form textarea {
     resize: vertical;
     min-height: 80px;
 }
 
-#initial-input-container button[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-#initial-input-container button[type="submit"]:hover {
-    background-color: #0056b3;
-}
+/* Removed styles for #initial-input-container and its submit button as it's gone */
 
 #chat-container {
-    margin-top: 30px;
+    /* margin-top is handled by #trip-parameters margin-bottom if needed, or can be adjusted here */
 }
 
 #chat-box {
